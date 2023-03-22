@@ -46,8 +46,6 @@ class SQLGUI:
 
     def do_something(self):
 
-        tkinter.messagebox.showinfo('Response', 'Logged In!')
-
         login = self.entry1.get()
         pw = self.entry2.get()
 
@@ -72,6 +70,15 @@ class SQLGUI:
         cursor = cn.cursor()
         cursor.execute('Select * From School.dbo.Course')
 
+        data = cursor.fetchall()
+
+        print(data)
+
+        for row in data:
+            courseID = row[0]
+            title = row[1]
+            credit = row[2]
+            deptID = row[3]
 
 myinstance = SQLGUI()
 
