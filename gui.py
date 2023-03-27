@@ -51,12 +51,15 @@ class SQLGUI:
 
         self.main_window.destroy()
 
+        login = 'zane_hill1'
+        pw = 'MIS4322student'
+
         preList = {}
         courseList = []
         cn_str = (
 
         'Driver={SQL Server Native Client 11.0};'
-        'Server=MIS-SQLJB'
+        'Server=MIS-SQLJB;'
         'Database=School;'
         'UID='+login+';'
         'PWD='+pw+';'
@@ -68,7 +71,7 @@ class SQLGUI:
         cn = pyodbc.connect(cn_str)
 
         cursor = cn.cursor()
-        cursor.execute('select * From School.dbo.Course')
+        cursor.execute('select name, budget From school.dbo.Department')
 
         data = cursor.fetchall()
 
@@ -93,6 +96,7 @@ class SQLGUI:
                 print(f"Credits for the course:{dict['Credit']}")
                 print(f"DeptID of the course:{dict['DeptID']}")
 
-myinstance = SQLGUI()
+        for row in cursor.fetchall():
+            print(row)
 
-print('Done!')
+myinstance = SQLGUI()
