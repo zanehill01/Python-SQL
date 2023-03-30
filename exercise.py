@@ -1,37 +1,32 @@
 import pyodbc
 
-def do_something(self):
+login = 'zane_hill1'
+pw = 'MIS4322student'
 
-        login = self.entry1.get()
-        pw = self.entry2.get()
+preList = {}
+courseList = []
+cn_str = (
 
-        self.main_window.destroy()
+    'Driver={SQL Server Native Client 11.0};'
+    'Server=MIS-SQLJB;'
+    'Database=School;'
+    'UID='+login+';'
+    'PWD='+pw+';'
 
-        login = 'zane_hill1'
-        pw = 'MIS4322student'
+)
 
-        preList = {}
-        courseList = []
-        cn_str = (
+# connect to server
 
-        'Driver={SQL Server Native Client 11.0};'
-        'Server=MIS-SQLJB;'
-        'Database=School;'
-        'UID='+login+';'
-        'PWD='+pw+';'
+cn = pyodbc.connect(cn_str)
 
-        )
+cursor = cn.cursor()
+cursor.execute('select name, budget From School.dbo.department')
 
-        # connect to server
+data = cursor.fetchall()
 
-        cn = pyodbc.connect(cn_str)
-
-        cursor = cn.cursor()
-        cursor.execute('select name, budget From school.dbo.Department')
-
-        data = cursor.fetchall()
-
-do_something(self)
+for row in data:
+    print(row[0])
+    print(row[1])
 
 '''
 1)
@@ -53,10 +48,6 @@ Computer Science		$310,500.00			$357,075.00		$46,575.00
 '''
 
 
-
-
-
-
 '''
 2)
 Display First Name, Last Name and corresponding personal and work email
@@ -73,12 +64,6 @@ Nino		Olivotto	simona@morasca.com				francine_vocelka@vocelka.com
 '''
 
 
-
-
-
-
-
-
 '''
 3)
 Display First Name, Last Name and corresponding home,cell and work phone numbers
@@ -89,6 +74,3 @@ Kim			Abercrombie		(504) 621-8927	(410) 621-8927	(313) 621-8927
 Fadi		Fakhouri		(810) 292-9388	(215) 292-9388	(815) 292-9388
 
 '''
-
-
-
